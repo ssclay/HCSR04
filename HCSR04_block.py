@@ -1,5 +1,5 @@
 from nio.block.base import Block
-from nio.properties import VersionProperty
+from nio.properties import VersionProperty, IntProperty
 from nio.signal.base import Signal
 import RPi.GPIO as GPIO
 import os, signal
@@ -8,15 +8,15 @@ import time
 class HCSR04(Block):
 
     version = VersionProperty('0.1.0')
-    TRIG = None
-    ECHO = None
+    trig = IntProperty(title = "Trigger GPIO", default = 23)
+    echo = IntProperty(title = "Echo GPIO", default = 24)
     pulse_start = None
     pulse_end = None
-    
+
     def __init__(self):
         super().__init__()
-        self.TRIG = 23
-        self.ECHO = 24
+        self.TRIG = self.trig()
+        self.ECHO = self.echo()
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.TRIG, GPIO.OUT)
         GPIO.setup(self.ECHO, GPIO.IN)
