@@ -2,6 +2,7 @@ Example
 ===========
 
 What does this block do?
+Ultrasonically measures distance using the HC-SRO4 Range finder and the GPIOs of a Raspberry PI
 
 Properties
 --------------
@@ -9,7 +10,7 @@ None
 
 Dependencies
 ----------------
-None
+RPi.GPIO
 
 Commands
 ----------------
@@ -17,8 +18,8 @@ None
 
 Input
 -------
-Any list of signals.
+None.
 
 Output
 ---------
-Same list of signals as input.
+Distance in cm.
