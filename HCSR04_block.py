@@ -2,19 +2,21 @@ from nio.block.base import Block
 from nio.properties import VersionProperty
 from nio.signal.base import Signal
 import RPi.GPIO as GPIO
-#import os, signal
+import os, signal
 import time
 
 class HCSR04(Block):
 
     version = VersionProperty('0.1.0')
-    #GPIO Numbers
-    TRIG = 23
-    ECHO = 24
-
-    def __init__(self, TRIG, ECHO):
-        self.TRIG = TRIG
-        self.ECHO = ECHO
+    TRIG = None
+    ECHO = None
+    pulse_start = None
+    pulse_end = None
+    
+    def __init__(self):
+        super().__init__()
+        self.TRIG = 23
+        self.ECHO = 24
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.TRIG, GPIO.OUT)
         GPIO.setup(self.ECHO, GPIO.IN)
@@ -30,12 +32,12 @@ class HCSR04(Block):
             GPIO.output(self.TRIG, False)
 
             while GPIO.input(self.ECHO) == 0:
-                pulse_start = time.time()
+               self.pulse_start = time.time()
 
             while GPIO.input(self.ECHO) == 1:
-                pulse_end = time.time()
+               self.pulse_end = time.time()
 
-            pulse_length = pulse_end - pulse_start
+            pulse_length = self.pulse_end - self.pulse_start
             #17150 = 1/2 speed of sound due to two trips of the sound
             distance = pulse_length * 17150
             distance = round(distance, 2) #for cm
