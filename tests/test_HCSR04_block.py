@@ -26,7 +26,7 @@ class TestHCSR04(NIOBlockTestCase):
             self.assertTrue((self.echo_gpio, mock_gpio.IN) in \
                             [a[0] for a in mock_gpio.setup.call_args_list])
             blk.start()
-            blk.process_signals([Signal({"hello": "n.io"})])
+            blk.process_signals([Signal()])
             blk.stop()
             self.assertEqual(mock_gpio.cleanup.call_count,1)
             self.assert_num_signals_notified(1)

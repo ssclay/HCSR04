@@ -2,7 +2,6 @@ from nio.block.base import Block
 from nio.properties import VersionProperty, IntProperty
 from nio.signal.base import Signal
 import RPi.GPIO as GPIO
-import os, signal
 import time
 
 class HCSR04(Block):
