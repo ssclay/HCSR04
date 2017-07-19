@@ -34,7 +34,7 @@ class HCSR04(Block):
             GPIO.output(self.TRIG, True)
             time.sleep(0.00001)
             GPIO.output(self.TRIG, False)
-
+            # todo: first measurement does not work, pulse_start = None
             while GPIO.input(self.ECHO) == 0:
                self.pulse_start = time.time()
 
