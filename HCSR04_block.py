@@ -8,8 +8,8 @@ import time
 class HCSR04(Block):
 
     version = VersionProperty('0.1.0')
-    trig = IntProperty(title = "Trigger GPIO", default = 23)
-    echo = IntProperty(title = "Echo GPIO", default = 24)
+    trig = IntProperty(title = "Trigger GPIO", default = 0)
+    echo = IntProperty(title = "Echo GPIO", default = 0)
     pulse_start = None
     pulse_end = None
 
@@ -17,6 +17,9 @@ class HCSR04(Block):
         super().__init__()
         self.TRIG = self.trig()
         self.ECHO = self.echo()
+
+    def configure(self, context):
+        super().configure(context)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.TRIG, GPIO.OUT)
         GPIO.setup(self.ECHO, GPIO.IN)
