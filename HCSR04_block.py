@@ -23,6 +23,9 @@ class HCSR04(Block):
         GPIO.setup(self.TRIG, GPIO.OUT)
         GPIO.setup(self.ECHO, GPIO.IN)
 
+    def stop(self):
+        super().stop()
+        GPIO.cleanup()
 
     def process_signals(self, signals):
         for signal in signals:
