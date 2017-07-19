@@ -13,13 +13,12 @@ class HCSR04(Block):
     pulse_start = None
     pulse_end = None
 
-    def __init__(self):
-        super().__init__()
-        self.TRIG = self.trig()
-        self.ECHO = self.echo()
-
     def configure(self, context):
         super().configure(context)
+        self.TRIG = self.trig()
+        self.ECHO = self.echo()
+        self.logger.debug(self.TRIG)
+        self.logger.debug(self.ECHO)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.TRIG, GPIO.OUT)
         GPIO.setup(self.ECHO, GPIO.IN)
@@ -28,7 +27,6 @@ class HCSR04(Block):
     def process_signals(self, signals):
         for signal in signals:
             GPIO.output(self.TRIG, False)
-            #time.sleep(0.5) #Time between readings
             #TRIGGER
             GPIO.output(self.TRIG, True)
             time.sleep(0.00001)
