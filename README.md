@@ -5,8 +5,8 @@ Ultrasonically measure distance using the HC-SRO4 Range finder and the GPIOs of 
 
 Properties
 --------------
-trig : Trigger GPIO, GPIO pin used to trigger the Measurement
-echo : Echo GPIO, Input pin to the Raspberry Pi
+trig : Trigger GPIO, GPIO pin number used to trigger the Measurement
+echo : Echo GPIO, Input pin number to the Raspberry Pi
 
 Dependencies
 ----------------
